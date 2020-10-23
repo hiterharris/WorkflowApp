@@ -8,14 +8,14 @@ import styles from './Styles';
 const App = (props) => {
     const {toggleActive, reset} = props;
     return (
-    <>
-        <TouchableOpacity onPress={toggleActive} style={styles.startButton}>
-            <Text style={styles.startButtonText}>Start</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={reset} style={styles.resetButton}>
-            <Text style={styles.resetButtonText}>Reset</Text>
-        </TouchableOpacity>
-    </>
+        <>
+            <TouchableOpacity onPress={toggleActive} style={styles.startButton}>
+                <Text style={styles.startButtonText}>Start</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={reset} style={styles.resetButton}>
+                <Text style={styles.resetButtonText}>Reset</Text>
+            </TouchableOpacity>
+        </>
     );
 };
 

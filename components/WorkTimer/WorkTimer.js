@@ -6,6 +6,7 @@ import {
   StatusBar,
 } from 'react-native';
 import styles from './Styles';
+import WheelPicker from '../DateTimePicker/DateTimePicker';
 
 const WorkTimer = (props) => {
   const {seconds, setSeconds, minutes, setMinutes, isActive, isBreakActive} = props;
@@ -19,22 +20,12 @@ const WorkTimer = (props) => {
   const showInput = () => {
     if (!isActive && !isBreakActive) {
       return (
-        <>
-          <TextInput
-            style={styles.input}
-            initialValue={`${minutes}`}
-            placeholder='Minutes'
-            placeholderTextColor='lightgray'
-            onChangeText={minutes => setMinutes(minutes)}
+          <WheelPicker
+            seconds={seconds}
+            setSeconds={setSeconds}
+            minutes={minutes}
+            setMinutes={setMinutes}
           />
-          <TextInput
-            style={styles.input}
-            initialValue={`${seconds}`}
-            placeholder='Seconds'
-            placeholderTextColor='lightgray'
-            onChangeText={seconds => setSeconds(seconds)}
-          />
-        </>
       );
     } else {
       return null
@@ -44,10 +35,10 @@ const WorkTimer = (props) => {
   return (
     <View style={styles.timer}>
         <StatusBar barStyle="light-content" />
-        <Text style={styles.title}>Work Time</Text>
         <View style={styles.inputs}>
           {showInput()}
         </View>
+        <Text style={styles.title}>Work Time</Text>
         <View style={styles.timer}>
           <Text style={styles.time}>{minutes}:{showZero()}{seconds}</Text>
         </View>

@@ -4,10 +4,10 @@ export default StyleSheet.create({
     app: {
         flex: 1,
         backgroundColor: '#282c34',
-        paddingTop: 10,
+        marginTop: -25,
       },
       timer: {
-        paddingTop: 50,
+        paddingTop: 150,
       },
       workTimer: {
         flex: 3,

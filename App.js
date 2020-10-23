@@ -17,7 +17,6 @@ const App = () => {
   const [breakMinutes, setBreakMinutes] = useState(0);
   const [isBreakActive, setIsBreakActive] = useState(false);
 
-
   const toggleActive = () => {
     if (!isActive && !isBreakActive && (seconds > 0 || minutes > 0)) {
       setIsActive(true);
@@ -92,19 +91,19 @@ const App = () => {
   return (
     <SafeAreaView style={styles.app}>
       <ScrollView style={styles.scrollView}>
-      <View style={styles.app}>
+        <View style={styles.app}>
 
-        <View style={ isActive || isBreakActive ? [styles.timer, styles.workTimer] : styles.workTimer }>
-          <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
-        </View>
+          <View style={ isActive || isBreakActive ? [styles.timer, styles.workTimer] : styles.workTimer }>
+            <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+          </View>
 
-        <View style={ isActive || isBreakActive ? [styles.timer, styles.breakTimer] : styles.breakTimer }>
-          <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
-        </View>
-        
-        <View style={styles.buttons}>
-          <Buttons toggleActive={toggleActive} reset={reset} />
-        </View>
+          <View style={ isActive || isBreakActive ? [styles.timer, styles.breakTimer] : styles.breakTimer }>
+            <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+          </View>
+          
+          <View style={styles.buttons}>
+            <Buttons toggleActive={toggleActive} reset={reset} />
+          </View>
 
         </View>
       </ScrollView>

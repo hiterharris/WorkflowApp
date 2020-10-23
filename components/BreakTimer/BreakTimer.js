@@ -2,9 +2,9 @@ import React from 'react';
 import {
   View,
   Text,
-  TextInput,
 } from 'react-native';
 import styles from './Styles';
+import WheelPicker from '../DateTimePicker/DateTimePicker';
 
 const BreakTimer = (props) => {
   const {seconds, setSeconds, minutes, setMinutes, isActive, isBreakActive} = props;
@@ -18,22 +18,12 @@ const BreakTimer = (props) => {
   const showInput = () => {
     if (!isActive && !isBreakActive) {
       return (
-        <>
-          <TextInput
-            style={styles.input}
-            initialValue={`${minutes}`}
-            placeholder='Minutes'
-            placeholderTextColor='lightgray'
-            onChangeText={minutes => setMinutes(minutes)}
-          />
-          <TextInput
-            style={styles.input}
-            initialValue={`${seconds}`}
-            placeholder='Seconds'
-            placeholderTextColor='lightgray'
-            onChangeText={seconds => setSeconds(seconds)}
-          />
-        </>
+        <WheelPicker
+          seconds={seconds}
+          setSeconds={setSeconds}
+          minutes={minutes}
+          setMinutes={setMinutes}
+        />
       );
     } else {
       return null
@@ -42,11 +32,11 @@ const BreakTimer = (props) => {
   
   return (
     <View style={styles.timer}>
-        <Text style={styles.title}>Break Time</Text>
         <View style={styles.inputs}>
           {showInput()}
         </View>
-        <View style={styles.timer}>
+        <Text style={styles.title}>Break Time</Text>
+        <View>
           <Text style={styles.time}>{minutes}:{showZero()}{seconds}</Text>
         </View>
     </View>
