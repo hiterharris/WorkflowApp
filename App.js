@@ -17,6 +17,7 @@ const App = () => {
   const [breakMinutes, setBreakMinutes] = useState(0);
   const [isBreakActive, setIsBreakActive] = useState(false);
 
+
   const toggleActive = () => {
     if (!isActive && !isBreakActive && (seconds > 0 || minutes > 0)) {
       setIsActive(true);
@@ -27,8 +28,8 @@ const App = () => {
     if (!isActive && isBreakActive) {
       setIsBreakActive(false);
     }
-    if (!isActive && !isBreakActive && (seconds === 0 || minutes === 0)) {
-      setIsBreakActive(true);
+    if (!isActive && !isBreakActive) {
+      setIsActive(true);
     }
   }
   
@@ -66,6 +67,7 @@ const App = () => {
 
   useEffect(() => {
     let interval = null;
+
     if (isBreakActive) {
     interval = setInterval(() => {
       setBreakSeconds(seconds => seconds - 1);
