@@ -4,25 +4,23 @@ export default StyleSheet.create({
     app: {
         flex: 1,
         backgroundColor: '#282c34',
+        paddingTop: 10,
       },
-      header: {
-        flex: 1,
+      timer: {
+        paddingTop: 50,
+      },
+      workTimer: {
+        flex: 3,
+        alignItems: 'center',
+        width: '100%',
+      },
+      breakTimer: {
+        flex: 3,
+        alignItems: 'center',
+      },
+      buttons: {
+        flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-      },
-      title: {
-        fontSize: 24,
-        fontWeight: '600',
-        color: 'white',
-      },
-      timerContainer: {
-        flex: 2,
-        alignItems: 'center',
-        width: '100%',
-      },
-      timerContainer2: {
-        flex: 2,
-        alignItems: 'center',
-      }
+        marginTop: 50,
+    },
 });
