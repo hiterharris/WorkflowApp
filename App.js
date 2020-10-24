@@ -102,7 +102,7 @@ const App = () => {
           </View>
           
           <View style={styles.buttons}>
-            <Buttons toggleActive={toggleActive} reset={reset} />
+            <Buttons isActive={isActive} isBreakActive={isBreakActive} toggleActive={toggleActive} reset={reset} />
           </View>
 
         </View>
