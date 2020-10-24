@@ -92,13 +92,27 @@ const App = () => {
     <SafeAreaView style={styles.app}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.app}>
-
-          <View style={ isActive || isBreakActive ? [styles.timer, styles.workTimer] : styles.workTimer }>
-            <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
-          </View>
-
-          <View style={ isActive || isBreakActive ? [styles.timer, styles.breakTimer] : styles.breakTimer }>
-            <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+          <View>
+            {!isActive && !isBreakActive ?          
+              <View>
+                <View style={ isActive || isBreakActive ? [styles.timer, styles.workTimer] : styles.workTimer }>
+                  <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                </View>
+    
+                <View style={ isActive || isBreakActive ? [styles.timer, styles.breakTimer] : styles.breakTimer }>
+                  <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                </View>
+              </View>
+              :
+              isActive ? 
+                <View style={ isActive || isBreakActive ? [styles.timer, styles.workTimer] : styles.workTimer }>
+                  <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                </View>
+                : 
+                <View style={ isActive || isBreakActive ? [styles.timer, styles.breakTimer] : styles.breakTimer }>
+                  <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                </View>
+            }
           </View>
           
           <View style={styles.buttons}>
