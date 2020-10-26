@@ -5,7 +5,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 24,
+        fontSize: 36,
         fontWeight: '600',
         color: 'white',
       },

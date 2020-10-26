@@ -38,7 +38,7 @@ const WorkTimer = (props) => {
         <View style={styles.inputs}>
           {showInput()}
         </View>
-        <Text style={styles.title}>Work Time</Text>
+        <Text style={styles.title}>Work</Text>
         <View style={styles.timer}>
           <Text style={styles.time}>{minutes}:{showZero()}{seconds}</Text>
         </View>

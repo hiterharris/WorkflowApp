@@ -7,7 +7,7 @@ export default StyleSheet.create({
         marginTop: -25,
       },
       timer: {
-        paddingTop: 150,
+        paddingTop: 275,
       },
       workTimer: {
         flex: 3,
@@ -21,6 +21,6 @@ export default StyleSheet.create({
       buttons: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: 50,
+        marginTop: 30,
     },
 });

@@ -35,7 +35,7 @@ const BreakTimer = (props) => {
         <View style={styles.inputs}>
           {showInput()}
         </View>
-        <Text style={styles.title}>Break Time</Text>
+        <Text style={styles.title}>Break</Text>
         <View>
           <Text style={styles.time}>{minutes}:{showZero()}{seconds}</Text>
         </View>

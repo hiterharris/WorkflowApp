@@ -16,19 +16,15 @@ const App = () => {
   const [breakSeconds, setBreakSeconds] = useState(0);
   const [breakMinutes, setBreakMinutes] = useState(0);
   const [isBreakActive, setIsBreakActive] = useState(false);
+  const [isWorkTime, setIsWorkTime] = useState(true);
 
   const toggleActive = () => {
-    if (!isActive && !isBreakActive && (seconds > 0 || minutes > 0)) {
-      setIsActive(true);
+    if (isWorkTime) {
+      setIsActive(!isActive);
     }
-    if (isActive && !isBreakActive) {
-      setIsActive(false);
-    }
-    if (!isActive && isBreakActive) {
-      setIsBreakActive(false);
-    }
-    if (!isActive && !isBreakActive) {
-      setIsActive(true);
+
+    if (!isWorkTime) {
+      setIsBreakActive(!isBreakActive);
     }
   }
   
@@ -60,6 +56,7 @@ const App = () => {
       setMinutes(0);
       setIsActive(false);
       setIsBreakActive(true);
+      setIsWorkTime(false);
     }
     return () => clearInterval(interval);
   }, [isActive, seconds, minutes]);
@@ -95,21 +92,21 @@ const App = () => {
           <View>
             {!isActive && !isBreakActive ?          
               <View>
-                <View style={ isActive || isBreakActive ? [styles.timer, styles.workTimer] : styles.workTimer }>
+                <View style={ isActive || isBreakActive ? [styles.timer] : styles.workTimer }>
                   <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
                 </View>
     
-                <View style={ isActive || isBreakActive ? [styles.timer, styles.breakTimer] : styles.breakTimer }>
+                <View style={ isActive || isBreakActive ? [styles.timer] : styles.breakTimer }>
                   <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
                 </View>
               </View>
               :
               isActive ? 
-                <View style={ isActive || isBreakActive ? [styles.timer, styles.workTimer] : styles.workTimer }>
+                <View style={ isActive || isBreakActive ? [styles.timer] : styles.workTimer }>
                   <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
                 </View>
                 : 
-                <View style={ isActive || isBreakActive ? [styles.timer, styles.breakTimer] : styles.breakTimer }>
+                <View style={ isActive || isBreakActive ? [styles.timer] : styles.breakTimer }>
                   <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
                 </View>
             }
