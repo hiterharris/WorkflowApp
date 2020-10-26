@@ -16,14 +16,14 @@ const App = () => {
   const [breakSeconds, setBreakSeconds] = useState(0);
   const [breakMinutes, setBreakMinutes] = useState(0);
   const [isBreakActive, setIsBreakActive] = useState(false);
-  const [isWorkTime, setIsWorkTime] = useState(true);
+  const [isWorkTime, setIsWorkTime] = useState(false);
 
   const toggleActive = () => {
-    if (isWorkTime) {
+    if (!isWorkTime) {
       setIsActive(!isActive);
     }
 
-    if (!isWorkTime) {
+    if (isWorkTime) {
       setIsBreakActive(!isBreakActive);
     }
   }
@@ -35,6 +35,7 @@ const App = () => {
     setBreakSeconds(0);
     setBreakMinutes(0);
     setIsBreakActive(false);
+    setIsWorkTime(!isWorkTime);
   }
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const App = () => {
       setMinutes(0);
       setIsActive(false);
       setIsBreakActive(true);
-      setIsWorkTime(false);
+      setIsWorkTime(!isWorkTime);
     }
     return () => clearInterval(interval);
   }, [isActive, seconds, minutes]);
