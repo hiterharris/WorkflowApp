@@ -10,6 +10,7 @@ import WorkTimer from './components/WorkTimer/WorkTimer';
 import BreakTimer from './components/BreakTimer/BreakTimer';
 import Buttons from './components/Buttons/Buttons';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import BackgroundTimer from 'react-native-background-timer';
 
 const App = () => {
   const [seconds, setSeconds] = useState(0);
@@ -20,6 +21,8 @@ const App = () => {
   const [isBreakActive, setIsBreakActive] = useState(false);
   const [isWorkTime, setIsWorkTime] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
+
+  BackgroundTimer.start();
 
   const toggleActive = () => {
     if (!isWorkTime) {
