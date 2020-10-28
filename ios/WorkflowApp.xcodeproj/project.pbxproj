@@ -53,6 +53,7 @@
 		1BC16024A508EA6587906036 /* libPods-WorkflowApp-WorkflowAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WorkflowApp-WorkflowAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* WorkflowApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WorkflowApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* WorkflowApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WorkflowApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E526C225499B8000A79735 /* WorkflowApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = WorkflowApp.entitlements; path = WorkflowApp/WorkflowApp.entitlements; sourceTree = "<group>"; };
 		37BF6C4FDBB3CBD98CE23677 /* Pods-WorkflowApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkflowApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-WorkflowApp-tvOS/Pods-WorkflowApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = WorkflowApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86CA5C7617C37705DC6E5F82 /* Pods-WorkflowApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkflowApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-WorkflowApp-tvOS/Pods-WorkflowApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		13B07FAE1A68108700A75B9A /* WorkflowApp */ = {
 			isa = PBXGroup;
 			children = (
+				31E526C225499B8000A79735 /* WorkflowApp.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -654,6 +656,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WorkflowApp/WorkflowApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -666,7 +669,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workflowclock.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workflow.app;
 				PRODUCT_NAME = WorkflowApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WorkflowApp-Bridging-Header.h";
@@ -682,6 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WorkflowApp/WorkflowApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -693,7 +697,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workflowclock.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workflow.app;
 				PRODUCT_NAME = WorkflowApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WorkflowApp-Bridging-Header.h";

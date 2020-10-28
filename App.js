@@ -3,11 +3,13 @@ import {
   View,
   SafeAreaView,
   ScrollView,
+  Alert,
 } from 'react-native';
 import styles from './Styles';
 import WorkTimer from './components/WorkTimer/WorkTimer';
 import BreakTimer from './components/BreakTimer/BreakTimer';
 import Buttons from './components/Buttons/Buttons';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 const App = () => {
   const [seconds, setSeconds] = useState(0);
@@ -17,6 +19,7 @@ const App = () => {
   const [breakMinutes, setBreakMinutes] = useState(0);
   const [isBreakActive, setIsBreakActive] = useState(false);
   const [isWorkTime, setIsWorkTime] = useState(false);
+  const [isBreakTime, setIsBreakTime] = useState(false);
 
   const toggleActive = () => {
     if (!isWorkTime) {
@@ -52,12 +55,13 @@ const App = () => {
         setMinutes(minutes - 1);
     }
     if (isActive && minutes === 0 && seconds === 0) {
-      alert('TIME TO TAKE A BREAK');
+      workCompleteNotification();
       setSeconds(0);
       setMinutes(0);
       setIsActive(false);
       setIsBreakActive(true);
       setIsWorkTime(!isWorkTime);
+      setIsBreakTime(!isBreakTime);
     }
     return () => clearInterval(interval);
   }, [isActive, seconds, minutes]);
@@ -79,11 +83,75 @@ const App = () => {
     }
 
     if (isBreakActive && breakMinutes === 0 && breakSeconds === 0) {
-        alert('TIME TO TAKE GET TO WORK');
+        breakCompleteNotification();
+        setIsBreakTime(!isBreakTime);
         reset();
     }
     return () => clearInterval(interval);
   }, [isBreakActive, breakSeconds, breakMinutes ]);
+
+  useEffect(() => {
+    PushNotificationIOS.addEventListener('register', onRegistered);
+    PushNotificationIOS.addEventListener(
+      'registrationError',
+      onRegistrationError,
+    );
+    PushNotificationIOS.addEventListener(
+      'localNotification',
+      onLocalNotification,
+    );
+
+    PushNotificationIOS.requestPermissions().then(
+      (data) => {
+        console.log('PushNotificationIOS.requestPermissions', data);
+      },
+      (data) => {
+        console.log('PushNotificationIOS.requestPermissions failed', data);
+      },
+    );
+
+    return () => {
+      PushNotificationIOS.removeEventListener('register');
+      PushNotificationIOS.removeEventListener('registrationError');
+      PushNotificationIOS.removeEventListener('notification');
+      PushNotificationIOS.removeEventListener('localNotification');
+    };
+  }, []);
+
+  const onRegistered = (deviceToken) => {
+    console.log('Token: ' + deviceToken);
+  };
+
+  const onRegistrationError = (error) => {
+    Alert.alert(
+        'Failed To Register For Remote Push',
+        `Error (${error.code}): ${error.message}`,
+        [
+        {
+            text: 'Dismiss',
+            onPress: null,
+        },
+        ],
+    );
+  };
+
+  const onLocalNotification = () => {
+    console.log('Notification Clicked');
+  };
+
+  const workCompleteNotification = () => {
+      PushNotificationIOS.presentLocalNotification({
+        alertTitle: 'Work Complete',
+        alertBody: 'Time to Take a Break',
+      });
+  };
+
+  const breakCompleteNotification = () => {
+    PushNotificationIOS.presentLocalNotification({
+      alertTitle: 'Break is Over',
+      alertBody: 'Time to Get Back to Work',
+    });
+  };
 
   return (
     <SafeAreaView style={styles.app}>
@@ -111,7 +179,7 @@ const App = () => {
                 </View>
             }
           </View>
-          
+  
           <View style={styles.buttons}>
             <Buttons isActive={isActive} isBreakActive={isBreakActive} toggleActive={toggleActive} reset={reset} />
           </View>
