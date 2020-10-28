@@ -93,15 +93,28 @@ const App = () => {
     return () => clearInterval(interval);
   }, [isBreakActive, breakSeconds, breakMinutes ]);
 
+  const setNotificationCategories = async () => {
+    PushNotificationIOS.setNotificationCategories([
+      {
+        id: 'snooze',
+        actions: [
+          {
+            id: 'open',
+            title: 'Snooze',
+            options: {
+              foreground: true,
+              background: true}
+            },
+        ],
+      },
+    ]);
+  };
+
   useEffect(() => {
     PushNotificationIOS.addEventListener('register', onRegistered);
     PushNotificationIOS.addEventListener(
       'registrationError',
       onRegistrationError,
-    );
-    PushNotificationIOS.addEventListener(
-      'localNotification',
-      onLocalNotification,
     );
 
     PushNotificationIOS.requestPermissions().then(
@@ -118,6 +131,7 @@ const App = () => {
       PushNotificationIOS.removeEventListener('registrationError');
       PushNotificationIOS.removeEventListener('notification');
       PushNotificationIOS.removeEventListener('localNotification');
+      setNotificationCategories();
     };
   }, []);
 
@@ -138,14 +152,11 @@ const App = () => {
     );
   };
 
-  const onLocalNotification = () => {
-    console.log('Notification Clicked');
-  };
-
   const workCompleteNotification = () => {
       PushNotificationIOS.presentLocalNotification({
         alertTitle: 'Work Complete',
         alertBody: 'Time to Take a Break',
+        category: 'snooze',
       });
   };
 
@@ -153,6 +164,7 @@ const App = () => {
     PushNotificationIOS.presentLocalNotification({
       alertTitle: 'Break is Over',
       alertBody: 'Time to Get Back to Work',
+      category: 'snooze',
     });
   };
 
@@ -190,7 +202,6 @@ const App = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
-
   );
 };
 
