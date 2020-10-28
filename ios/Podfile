@@ -8,6 +8,8 @@ target 'WorkflowApp' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
+
   target 'WorkflowAppTests' do
     inherit! :complete
     # Pods for testing

@@ -292,7 +292,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = KY84WX37NA;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1200;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -669,6 +669,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workflowclock.app;
 				PRODUCT_NAME = WorkflowApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WorkflowApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -695,6 +696,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workflowclock.app;
 				PRODUCT_NAME = WorkflowApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WorkflowApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

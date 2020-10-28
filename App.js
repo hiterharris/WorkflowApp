@@ -64,7 +64,6 @@ const App = () => {
 
   useEffect(() => {
     let interval = null;
-
     if (isBreakActive) {
     interval = setInterval(() => {
       setBreakSeconds(seconds => seconds - 1);
