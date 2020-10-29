@@ -25,10 +25,8 @@ const App = () => {
   const [isBreakTime, setIsBreakTime] = useState(false);
   const [deviceToken, setDeviceToken] = useState('');
   const [appState, setAppState] = useState('');
-  const [nextAppState, setNextAppState] = useState('');
 
   AppStateHelper(setAppState, setAppState);
-  console.log(appState);
 
   console.log(`${minutes}:${seconds}`);
 
@@ -121,9 +119,7 @@ const App = () => {
     if (Platform.OS == 'ios' && appState == 'background') {
       BackgroundTimer.start();
     }
-    if (Platform.OS == 'ios' && appState == 'active') {
-      BackgroundTimer.stop();
-    }
+
   }, [appState]);
 
 
