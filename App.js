@@ -22,77 +22,6 @@ const App = () => {
   const [isWorkTime, setIsWorkTime] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
 
-  BackgroundTimer.start();
-
-  const toggleActive = () => {
-    if (!isWorkTime) {
-      setIsActive(!isActive);
-    }
-
-    if (isWorkTime) {
-      setIsBreakActive(!isBreakActive);
-    }
-  }
-  
-  const reset = () => {
-    setSeconds(0);
-    setMinutes(0);
-    setIsActive(false);
-    setBreakSeconds(0);
-    setBreakMinutes(0);
-    setIsBreakActive(false);
-    setIsWorkTime(!isWorkTime);
-  }
-
-  useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds(seconds => seconds - 1);
-      }, 1000);
-    }
-    if (isActive && seconds === 0) {
-        setSeconds(59);
-    }
-    if (isActive && seconds === 0) {
-        setMinutes(minutes - 1);
-    }
-    if (isActive && minutes === 0 && seconds === 0) {
-      workCompleteNotification();
-      setSeconds(0);
-      setMinutes(0);
-      setIsActive(false);
-      setIsBreakActive(true);
-      setIsWorkTime(!isWorkTime);
-      setIsBreakTime(!isBreakTime);
-    }
-    return () => clearInterval(interval);
-  }, [isActive, seconds, minutes]);
-
-  useEffect(() => {
-    let interval = null;
-    if (isBreakActive) {
-    interval = setInterval(() => {
-      setBreakSeconds(seconds => seconds - 1);
-    }, 1000);
-    }
-
-    if (isBreakActive && breakSeconds === 0) {
-      setBreakSeconds(59);
-    }
-
-    if (isBreakActive && breakSeconds === 0) {
-        setMinutes(breakMinutes - 1);
-    }
-
-    if (isBreakActive && breakMinutes === 0 && breakSeconds === 0) {
-        breakCompleteNotification();
-        setIsBreakTime(!isBreakTime);
-        reset();
-    }
-    return () => clearInterval(interval);
-  }, [isBreakActive, breakSeconds, breakMinutes ]);
-
   const setNotificationCategories = async () => {
     PushNotificationIOS.setNotificationCategories([
       {
@@ -103,20 +32,18 @@ const App = () => {
             title: 'Snooze',
             options: {
               foreground: true,
-              background: true}
+              background: true,
+            }
             },
         ],
       },
     ]);
   };
+  setNotificationCategories();
 
   useEffect(() => {
     PushNotificationIOS.addEventListener('register', onRegistered);
-    PushNotificationIOS.addEventListener(
-      'registrationError',
-      onRegistrationError,
-    );
-
+    PushNotificationIOS.addEventListener('registrationError', onRegistrationError);
     PushNotificationIOS.requestPermissions().then(
       (data) => {
         console.log('PushNotificationIOS.requestPermissions', data);
@@ -125,14 +52,6 @@ const App = () => {
         console.log('PushNotificationIOS.requestPermissions failed', data);
       },
     );
-
-    return () => {
-      PushNotificationIOS.removeEventListener('register');
-      PushNotificationIOS.removeEventListener('registrationError');
-      PushNotificationIOS.removeEventListener('notification');
-      PushNotificationIOS.removeEventListener('localNotification');
-      setNotificationCategories();
-    };
   }, []);
 
   const onRegistered = (deviceToken) => {
@@ -167,6 +86,76 @@ const App = () => {
       category: 'snooze',
     });
   };
+
+  const toggleActive = () => {
+    if (!isWorkTime) {
+      setIsActive(!isActive);
+    }
+    if (isWorkTime) {
+      setIsBreakActive(!isBreakActive);
+    }
+  }
+  
+  const reset = () => {
+    setSeconds(0);
+    setMinutes(0);
+    setIsActive(false);
+    setBreakSeconds(0);
+    setBreakMinutes(0);
+    setIsBreakActive(false);
+    setIsBreakTime(false);
+    setIsWorkTime(false);
+  }
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      BackgroundTimer.start();
+      interval = BackgroundTimer.setInterval(() => {
+        setSeconds(seconds => seconds - 1);
+      }, 1000);
+    }
+    if (isActive && seconds === 0) {
+        setSeconds(59);
+    }
+    if (isActive && seconds === 0) {
+        setMinutes(minutes - 1);
+    }
+    if (isActive && minutes === 0 && seconds === 0) {
+      workCompleteNotification();
+      setSeconds(0);
+      setMinutes(0);
+      setIsActive(false);
+      setIsBreakActive(true);
+      setIsWorkTime(!isWorkTime);
+      setIsBreakTime(!isBreakTime);
+    }
+    return () => BackgroundTimer.clearInterval(interval);
+  }, [isActive, seconds, minutes]);
+
+  useEffect(() => {
+    let interval = null;
+    if (isBreakActive) {
+    interval = BackgroundTimer.setInterval(() => {
+      setBreakSeconds(seconds => seconds - 1);
+    }, 1000);
+    }
+
+    if (isBreakActive && breakSeconds && isBreakTime === 0) {
+      setBreakSeconds(59);
+    }
+
+    if (isBreakActive && breakSeconds === 0) {
+        setMinutes(breakMinutes - 1);
+    }
+
+    if (isBreakActive && breakMinutes === 0 && breakSeconds === 0) {
+        breakCompleteNotification();
+        setIsBreakTime(!isBreakTime);
+        reset();
+    }
+    return () => BackgroundTimer.clearInterval(interval);
+  }, [isBreakActive, breakSeconds, breakMinutes ]);
 
   return (
     <SafeAreaView style={styles.app}>
