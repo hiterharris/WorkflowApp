@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   ScrollView,
   Alert,
+  Platform,
 } from 'react-native';
 import styles from './Styles';
 import WorkTimer from './components/WorkTimer/WorkTimer';
@@ -11,6 +12,7 @@ import BreakTimer from './components/BreakTimer/BreakTimer';
 import Buttons from './components/Buttons/Buttons';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import BackgroundTimer from 'react-native-background-timer';
+import { AppStateHelper } from './helpers/AppState';
 
 const App = () => {
   const [seconds, setSeconds] = useState(0);
@@ -21,6 +23,14 @@ const App = () => {
   const [isBreakActive, setIsBreakActive] = useState(false);
   const [isWorkTime, setIsWorkTime] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
+  const [deviceToken, setDeviceToken] = useState('');
+  const [appState, setAppState] = useState('');
+  const [nextAppState, setNextAppState] = useState('');
+
+  AppStateHelper(setAppState, setAppState);
+  console.log(appState);
+
+  console.log(`${minutes}:${seconds}`);
 
   const setNotificationCategories = async () => {
     PushNotificationIOS.setNotificationCategories([
@@ -41,21 +51,8 @@ const App = () => {
   };
   setNotificationCategories();
 
-  useEffect(() => {
-    PushNotificationIOS.addEventListener('register', onRegistered);
-    PushNotificationIOS.addEventListener('registrationError', onRegistrationError);
-    PushNotificationIOS.requestPermissions().then(
-      (data) => {
-        console.log('PushNotificationIOS.requestPermissions', data);
-      },
-      (data) => {
-        console.log('PushNotificationIOS.requestPermissions failed', data);
-      },
-    );
-  }, []);
-
-  const onRegistered = (deviceToken) => {
-    console.log('Token: ' + deviceToken);
+  const onRegistered = (token) => {
+    setDeviceToken(token);
   };
 
   const onRegistrationError = (error) => {
@@ -63,13 +60,26 @@ const App = () => {
         'Failed To Register For Remote Push',
         `Error (${error.code}): ${error.message}`,
         [
-        {
-            text: 'Dismiss',
-            onPress: null,
-        },
+          {
+              text: 'Dismiss',
+              onPress: null,
+          },
         ],
     );
   };
+
+  useEffect(() => {
+    PushNotificationIOS.addEventListener('register', onRegistered);
+    PushNotificationIOS.addEventListener('registrationError', onRegistrationError);
+    PushNotificationIOS.requestPermissions().then(
+      (data) => {
+        console.log('Permissions', data);
+      },
+      (data) => {
+        console.log('Permissions failed', data);
+      },
+    );
+  }, [deviceToken]);
 
   const workCompleteNotification = () => {
       PushNotificationIOS.presentLocalNotification({
@@ -108,9 +118,18 @@ const App = () => {
   }
 
   useEffect(() => {
+    if (Platform.OS == 'ios' && appState == 'background') {
+      BackgroundTimer.start();
+    }
+    if (Platform.OS == 'ios' && appState == 'active') {
+      BackgroundTimer.stop();
+    }
+  }, [appState]);
+
+
+  useEffect(() => {
     let interval = null;
     if (isActive) {
-      BackgroundTimer.start();
       interval = BackgroundTimer.setInterval(() => {
         setSeconds(seconds => seconds - 1);
       }, 1000);
@@ -129,6 +148,7 @@ const App = () => {
       setIsBreakActive(true);
       setIsWorkTime(!isWorkTime);
       setIsBreakTime(!isBreakTime);
+      BackgroundTimer.clearInterval(interval);
     }
     return () => BackgroundTimer.clearInterval(interval);
   }, [isActive, seconds, minutes]);
@@ -136,22 +156,24 @@ const App = () => {
   useEffect(() => {
     let interval = null;
     if (isBreakActive) {
-    interval = BackgroundTimer.setInterval(() => {
-      setBreakSeconds(seconds => seconds - 1);
-    }, 1000);
-    }
-
-    if (isBreakActive && breakSeconds && isBreakTime === 0) {
-      setBreakSeconds(59);
+      BackgroundTimer.start();
+      interval = BackgroundTimer.setInterval(() => {
+        setBreakSeconds(seconds => seconds - 1);
+      }, 1000);
     }
 
     if (isBreakActive && breakSeconds === 0) {
-        setMinutes(breakMinutes - 1);
+        setBreakSeconds(59);
+    }
+
+    if (isBreakActive && breakSeconds === 0) {
+        setBreakMinutes(breakMinutes - 1);
     }
 
     if (isBreakActive && breakMinutes === 0 && breakSeconds === 0) {
         breakCompleteNotification();
         setIsBreakTime(!isBreakTime);
+        BackgroundTimer.clearInterval(interval);
         reset();
     }
     return () => BackgroundTimer.clearInterval(interval);
@@ -183,7 +205,7 @@ const App = () => {
                 </View>
             }
           </View>
-  
+
           <View style={styles.buttons}>
             <Buttons isActive={isActive} isBreakActive={isBreakActive} toggleActive={toggleActive} reset={reset} />
           </View>

@@ -2,6 +2,9 @@ PODS:
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.4)
   - CocoaLibEvent (1.0.0)
+  - CocoaLumberjack (3.6.2):
+    - CocoaLumberjack/Core (= 3.6.2)
+  - CocoaLumberjack/Core (3.6.2)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.63.3)
   - FBReactNativeSpec (0.63.3):
@@ -298,6 +301,11 @@ PODS:
     - React-Core (= 0.63.3)
     - React-cxxreact (= 0.63.3)
     - React-jsi (= 0.63.3)
+  - RNBackgroundFetch (3.1.0):
+    - React
+  - RNBackgroundGeolocation (3.9.1):
+    - CocoaLumberjack (~> 3.6.1)
+    - React-Core
   - RNCPushNotificationIOS (1.7.1):
     - React-Core
   - RNDateTimePicker (3.0.4):
@@ -354,6 +362,8 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
+  - RNBackgroundGeolocation (from `../node_modules/react-native-background-geolocation`)
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -363,6 +373,7 @@ SPEC REPOS:
     - boost-for-react-native
     - CocoaAsyncSocket
     - CocoaLibEvent
+    - CocoaLumberjack
     - Flipper
     - Flipper-DoubleConversion
     - Flipper-Folly
@@ -426,6 +437,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNBackgroundFetch:
+    :path: "../node_modules/react-native-background-fetch"
+  RNBackgroundGeolocation:
+    :path: "../node_modules/react-native-background-geolocation"
   RNCPushNotificationIOS:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDateTimePicker:
@@ -437,6 +452,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
+  CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 878b59e31113e289e275165efbe4b54fa614d43d
   FBReactNativeSpec: 7da9338acfb98d4ef9e5536805a0704572d33c2f
@@ -471,11 +487,13 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
+  RNBackgroundFetch: 81c690aa5e8e67dbc3f86ecb7f26629c00c6060d
+  RNBackgroundGeolocation: b14263a4dab473eeda885420f1b2154c3926b417
   RNCPushNotificationIOS: eaf01f848a0b872b194d31bcad94bb864299e01e
   RNDateTimePicker: 88dc10d685ce961339bad3353c64db96c5abd19b
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 259aa7f82680c2c3c2800ab91d2f6c7e55b4e625
+PODFILE CHECKSUM: eca06ab27a833d991a06938ed87e6f7fb74169c3
 
 COCOAPODS: 1.9.3

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* WorkflowAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WorkflowAppTests.m */; };
 		0326D10DAEA68F0E0E3E2625 /* libPods-WorkflowApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F1B8AD31140523D1B095E3 /* libPods-WorkflowApp-tvOSTests.a */; };
@@ -20,6 +19,7 @@
 		B6C778B71D23DC9FADCD85EA /* libPods-WorkflowApp-WorkflowAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC16024A508EA6587906036 /* libPods-WorkflowApp-WorkflowAppTests.a */; };
 		C0029B675BA27FD7A1AE4639 /* libPods-WorkflowApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C95D6513ACD63F874687A1A1 /* libPods-WorkflowApp.a */; };
 		E669996FE3CFBC566ED27BBC /* libPods-WorkflowApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F65F94E648E574345B26F24D /* libPods-WorkflowApp-tvOS.a */; };
+		7AAA8998171D469D8370F41E /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C55FA9AFC724763B5DF7F27 /* TSLocationManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +67,7 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F65F94E648E574345B26F24D /* libPods-WorkflowApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WorkflowApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4594F3813E06A93FEBD0DB /* Pods-WorkflowApp-WorkflowAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkflowApp-WorkflowAppTests.release.xcconfig"; path = "Target Support Files/Pods-WorkflowApp-WorkflowAppTests/Pods-WorkflowApp-WorkflowAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		4C55FA9AFC724763B5DF7F27 /* TSLocationManager.framework */ = {isa = PBXFileReference; name = "TSLocationManager.framework"; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0029B675BA27FD7A1AE4639 /* libPods-WorkflowApp.a in Frameworks */,
+				7AAA8998171D469D8370F41E /* TSLocationManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +147,7 @@
 				1BC16024A508EA6587906036 /* libPods-WorkflowApp-WorkflowAppTests.a */,
 				F65F94E648E574345B26F24D /* libPods-WorkflowApp-tvOS.a */,
 				95F1B8AD31140523D1B095E3 /* libPods-WorkflowApp-tvOSTests.a */,
+				4C55FA9AFC724763B5DF7F27 /* TSLocationManager.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -296,6 +299,11 @@
 						DevelopmentTeam = KY84WX37NA;
 						LastSwiftMigration = 1200;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = true;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -627,6 +635,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkflowApp.app/WorkflowApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Debug;
 		};
@@ -647,6 +658,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkflowApp.app/WorkflowApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Release;
 		};
@@ -676,6 +690,9 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Debug;
 		};
@@ -703,6 +720,9 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "WorkflowApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Release;
 		};
@@ -731,6 +751,9 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Debug;
 		};
@@ -759,6 +782,9 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Release;
 		};
@@ -786,6 +812,9 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkflowApp-tvOS.app/WorkflowApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Debug;
 		};
@@ -813,6 +842,9 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkflowApp-tvOS.app/WorkflowApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+				);
 			};
 			name = Release;
 		};
