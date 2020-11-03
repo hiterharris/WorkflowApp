@@ -40,7 +40,6 @@ const App = () => {
             title: 'Snooze',
             options: {
               foreground: true,
-              background: true,
             }
             },
         ],

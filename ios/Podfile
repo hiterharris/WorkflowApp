@@ -10,12 +10,6 @@ target 'WorkflowApp' do
 
   pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
 
-  pod 'RNBackgroundGeolocation', :path => '../node_modules/react-native-background-geolocation'
-
-  pod 'RNBackgroundFetch', :path => '../node_modules/react-native-background-fetch'
-
-  pod 'RealmJS', :path => '../node_modules/realm'
-
   target 'WorkflowAppTests' do
     inherit! :complete
     # Pods for testing
