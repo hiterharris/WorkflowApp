@@ -111,6 +111,9 @@ const App = () => {
     let interval = null;
     if (isActive) {
       BackgroundTimer.start();
+      
+      console.log(`${minutes}:${seconds}`);
+
       interval = BackgroundTimer.setInterval(() => {
         setSeconds(seconds => seconds - 1);
       }, 1000);
