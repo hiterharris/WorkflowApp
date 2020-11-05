@@ -21,6 +21,9 @@ const App = () => {
   const [isBreakActive, setIsBreakActive] = useState(false);
   const [isWorkTime, setIsWorkTime] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
+  const [initialWorkMinutes, setInitialWorkMinutes] = useState(0);
+
+  console.log("initialWorkMinutes: ", initialWorkMinutes);
 
   const setNotificationCategories = async () => {
     PushNotificationIOS.setNotificationCategories([
@@ -122,6 +125,7 @@ const App = () => {
         setSeconds(59);
     }
     if (isActive && seconds === 0) {
+      setMinutes(initialWorkMinutes);
         setMinutes(minutes - 1);
     }
     if (isActive && minutes === 0 && seconds === 0) {
@@ -168,27 +172,64 @@ const App = () => {
             {!isActive && !isBreakActive ?          
               <View>
                 <View style={ isActive || isBreakActive ? [styles.timer] : styles.workTimer }>
-                  <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                  <WorkTimer
+                    seconds={seconds}
+                    setSeconds={setSeconds}
+                    minutes={minutes}
+                    setMinutes={setMinutes}
+                    isActive={isActive}
+                    isBreakActive={isBreakActive}
+                    initialWorkMinutes={initialWorkMinutes}
+                    setInitialWorkMinutes={setInitialWorkMinutes}  
+                  />
                 </View>
     
                 <View style={ isActive || isBreakActive ? [styles.timer] : styles.breakTimer }>
-                  <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                  <BreakTimer
+                    seconds={breakSeconds}
+                    setSeconds={setBreakSeconds}
+                    minutes={breakMinutes}
+                    setMinutes={setBreakMinutes}
+                    isActive={isActive}
+                    isBreakActive={isBreakActive}
+                  />
                 </View>
               </View>
               :
               isActive ? 
                 <View style={ isActive || isBreakActive ? [styles.timer] : styles.workTimer }>
-                  <WorkTimer seconds={seconds} setSeconds={setSeconds} minutes={minutes} setMinutes={setMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                  <WorkTimer
+                    seconds={seconds}
+                    setSeconds={setSeconds}
+                    minutes={minutes}
+                    setMinutes={setMinutes}
+                    isActive={isActive}
+                    isBreakActive={isBreakActive}
+                    initialWorkMinutes={initialWorkMinutes}
+                    setInitialWorkMinutes={setInitialWorkMinutes}
+                  />
                 </View>
                 : 
                 <View style={ isActive || isBreakActive ? [styles.timer] : styles.breakTimer }>
-                  <BreakTimer seconds={breakSeconds} setSeconds={setBreakSeconds} minutes={breakMinutes} setMinutes={setBreakMinutes} isActive={isActive} isBreakActive={isBreakActive} />
+                  <BreakTimer
+                    seconds={breakSeconds}
+                    setSeconds={setBreakSeconds}
+                    minutes={breakMinutes}
+                    setMinutes={setBreakMinutes}
+                    isActive={isActive}
+                    isBreakActive={isBreakActive}
+                  />
                 </View>
             }
           </View>
   
           <View style={styles.buttons}>
-            <Buttons isActive={isActive} isBreakActive={isBreakActive} toggleActive={toggleActive} reset={reset} />
+            <Buttons
+              isActive={isActive}
+              isBreakActive={isBreakActive}
+              toggleActive={toggleActive}
+              reset={reset}
+            />
           </View>
 
         </View>
