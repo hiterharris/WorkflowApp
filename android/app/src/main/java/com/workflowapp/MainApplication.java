@@ -5,6 +5,8 @@ import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import io.realm.react.RealmReactPackage;
+import com.ocetnik.timer.BackgroundTimerPackage;
+import io.realm.react.RealmReactPackage;
 import io.realm.react.RealmReactPackage;
 import io.realm.react.RealmReactPackage;
 import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
