@@ -13,7 +13,7 @@ const WheelPicker = (props) => {
         <Picker color="white" style={{width: 100, height: 180}}
           selectedValue={props.minutes}
           itemStyle={{color:"white", fontSize:18}}
-          onValueChange={(index) => (props.setMinutes(index), props.setInitialWorkMinutes(index) )}>
+          onValueChange={(index) => (props.setMinutes(index) )}>
           {itemList.map((value, i) => (
             <PickerItem label={value} value={i} key={i}/>
           ))}

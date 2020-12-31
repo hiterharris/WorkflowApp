@@ -9,7 +9,7 @@ import styles from './Styles';
 import WheelPicker from '../DateTimePicker/DateTimePicker';
 
 const WorkTimer = (props) => {
-  const {initialWorkMinutes, setInitialWorkMinutes, seconds, setSeconds, minutes, setMinutes, isActive, isBreakActive} = props;
+  const {seconds, setSeconds, minutes, setMinutes, isActive, isBreakActive} = props;
 
   const showZero = () => {
     if (seconds < 10) {
@@ -25,8 +25,6 @@ const WorkTimer = (props) => {
             setSeconds={setSeconds}
             minutes={minutes}
             setMinutes={setMinutes}
-            initialWorkMinutes={initialWorkMinutes}
-            setInitialWorkMinutes={setInitialWorkMinutes}
           />
       );
     } else {

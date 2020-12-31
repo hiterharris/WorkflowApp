@@ -21,9 +21,6 @@ const App = () => {
   const [isBreakActive, setIsBreakActive] = useState(false);
   const [isWorkTime, setIsWorkTime] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
-  const [initialWorkMinutes, setInitialWorkMinutes] = useState(0);
-
-  console.log("initialWorkMinutes: ", initialWorkMinutes);
 
   const setNotificationCategories = async () => {
     PushNotificationIOS.setNotificationCategories([
@@ -114,9 +111,6 @@ const App = () => {
     let interval = null;
     if (isActive) {
       BackgroundTimer.start();
-      
-      console.log(`${minutes}:${seconds}`);
-
       interval = BackgroundTimer.setInterval(() => {
         setSeconds(seconds => seconds - 1);
       }, 1000);
@@ -125,7 +119,6 @@ const App = () => {
         setSeconds(59);
     }
     if (isActive && seconds === 0) {
-      setMinutes(initialWorkMinutes);
         setMinutes(minutes - 1);
     }
     if (isActive && minutes === 0 && seconds === 0) {
@@ -147,15 +140,12 @@ const App = () => {
       setBreakSeconds(seconds => seconds - 1);
     }, 1000);
     }
-
-    if (isBreakActive && breakSeconds && isBreakTime === 0) {
+    if (isBreakActive && breakSeconds === 0) {
       setBreakSeconds(59);
     }
-
     if (isBreakActive && breakSeconds === 0) {
-        setMinutes(breakMinutes - 1);
+        setBreakMinutes(breakMinutes - 1);
     }
-
     if (isBreakActive && breakMinutes === 0 && breakSeconds === 0) {
         breakCompleteNotification();
         setIsBreakTime(!isBreakTime);
@@ -179,8 +169,6 @@ const App = () => {
                     setMinutes={setMinutes}
                     isActive={isActive}
                     isBreakActive={isBreakActive}
-                    initialWorkMinutes={initialWorkMinutes}
-                    setInitialWorkMinutes={setInitialWorkMinutes}  
                   />
                 </View>
     
@@ -205,8 +193,6 @@ const App = () => {
                     setMinutes={setMinutes}
                     isActive={isActive}
                     isBreakActive={isBreakActive}
-                    initialWorkMinutes={initialWorkMinutes}
-                    setInitialWorkMinutes={setInitialWorkMinutes}
                   />
                 </View>
                 : 
@@ -222,7 +208,6 @@ const App = () => {
                 </View>
             }
           </View>
-  
           <View style={styles.buttons}>
             <Buttons
               isActive={isActive}
@@ -231,7 +216,6 @@ const App = () => {
               reset={reset}
             />
           </View>
-
         </View>
       </ScrollView>
     </SafeAreaView>
