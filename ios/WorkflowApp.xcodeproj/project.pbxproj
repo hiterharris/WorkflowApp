@@ -67,8 +67,6 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F65F94E648E574345B26F24D /* libPods-WorkflowApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WorkflowApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4594F3813E06A93FEBD0DB /* Pods-WorkflowApp-WorkflowAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkflowApp-WorkflowAppTests.release.xcconfig"; path = "Target Support Files/Pods-WorkflowApp-WorkflowAppTests/Pods-WorkflowApp-WorkflowAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		4C55FA9AFC724763B5DF7F27 /* TSLocationManager.framework */ = {isa = PBXFileReference; name = "TSLocationManager.framework"; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		00E356EB1AD99517003FC87E /* Frameworks */ = {
